@@ -1,0 +1,281 @@
+#map {
+position: absolute;
+top; 0;
+bottom: 0;
+left: 0;
+right: 0;
+width: 100%;
+height: 100%;
+}
+
+.custom-form {
+	padding: 20px;
+	border-radius: 15px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	font-size: 14px;
+	width: 23vw;
+	height: 65vh;
+}
+
+.leaflet-top.leaflet-right {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-start;
+}
+
+.leaflet-control-layers {
+	margin-right: 60px; /* Adjust as needed */
+}
+
+.leaflet-control-layers {
+	width: auto !important;
+}
+
+.leaflet-control-layers-expanded {
+	display: block !important;
+}
+
+.leaflet-control-layers {
+	background: white;
+	padding: 15px;
+	border-radius: 15px;
+	box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+	font-size: 14px;
+	z-index: 1001;
+	background-image: linear-gradient(to right, #003e66, #024d7d, #003e66);
+	color: white;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	color: #ffffff;
+}
+
+* {
+	font-family: sans-serif;
+}
+
+.layer-box {
+	position: fixed;
+	top: 90px;
+	right: 23vw;
+	background: white;
+	padding: 15px;
+	border-radius: 5px;
+	box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+	font-size: 14px;
+	z-index: 1001;
+	background-image: linear-gradient(to right, #003e66, #024d7d, #003e66);
+}
+
+.marker-cluster-small {
+	background-color: #044c7c;
+	color: white;
+}
+
+#detailsPopup,
+#detailsPopup * {
+	color: black !important;
+}
+
+#detailsPopup {
+	max-width: 450px;
+	width: 80%;
+	background-color: white;
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#detailsPopup h3 {
+	margin-top: 0;
+	margin-bottom: 12px;
+	text-align: left;
+}
+
+.detailsTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.detailsTable td {
+	padding: 6px 8px;
+	vertical-align: top;
+}
+
+.detailsTable td:first-child {
+	font-weight: bold;
+	width: 40%;
+	text-align: left;
+	padding-right: 12px;
+}
+
+.detailsTable td:last-child {
+	width: 60%;
+	text-align: left;
+}
+
+.leaflet-control-layers-overlays label {
+	display: flex;
+	align-items: center;	
+   	gap: 6px;
+}
+
+/*========================== CHECKBOX ===============================*/
+
+/* Apply your custom checkbox styles */
+.leaflet-control-layers-overlays input[type="checkbox"] {
+	appearance: none;
+        background-color: #dfe1e4;
+	border-radius: 72px;
+	border: none;
+	height: 20px;
+	width: 30px;
+	position: relative;
+	flex-shrink: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+/* Padding wrapper (mimics the invisible clickable area) */
+.leaflet-control-layers-overlays input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	bottom: -6px;
+	right: -6px;
+}
+
+/* Toggle dot */
+.leaflet-control-layers-overlays input[type="checkbox"]::after {
+	content: "";
+	position: absolute;
+	background-color: #fff;
+	border-radius: 50%;
+	height: 14px;
+	width: 14px;
+	top: 3px;
+	left: 3px;
+	transition: all 100ms ease-out;
+}
+
+/* Hover background */
+.leaflet-control-layers-overlays input[type="checkbox"]:hover {
+	background-color: #c9cbcd;
+}
+
+/* Checked (switch) state */
+.leaflet-control-layers-overlays input[type="checkbox"]:checked {
+	background-color: #6e79d6;
+}
+
+/* Move dot when checked */
+.leaflet-control-layers-overlays input[type="checkbox"]:checked::after {
+	left: 13px;
+}
+
+/* hover color for checked state */
+.leaflet-control-layers-overlays input[type="checkbox"]:checked:hover {
+	background-color: #535db3;
+}
+
+/*========================== RADIO ==================================*/
+
+.leaflet-control-layers-base .radio-wrapper-6 {
+	display: flex;
+	align-items: center;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+	.radio-wrapper-6 input[type=radio] {
+		--active: #6e79d6;
+		--active-inner: #fff;
+		--focus: 2px rgba(39, 94, 254, .3);
+		--border: #BBC1E1;
+		--border-hover: #275EFE;
+		--background: #fff;
+		--disabled: #F6F8FF;
+		--disabled-inner: #E1E6F9;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		height: 21px;
+		outline: none;
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		margin: 0;
+		cursor: pointer;
+		border: 1px solid var(--bc, var(--border));
+		background: var(--b, var(--background));
+		transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+		border-radius: 50%;
+		width: 21px;
+	}
+
+
+	.radio-wrapper-6 input[type=radio]:after {
+		content: "";
+		display: block;
+		left: 1px;
+		top: 1px;
+		position: absolute;
+		width: 19px;
+		height: 19px;
+		border-radius: 50%;
+		background: var(--active-inner);
+		opacity: var(--o, 0);
+		transform: scale(var(--s, 0.7));
+		transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+	}
+
+	.radio-wrapper-6 input[type=radio]:checked {
+		--b: var(--active);
+		--bc: var(--active);
+		--d-o: .3s;
+		--d-t: .6s;
+		--d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+		--o: 1;
+		--s: .5;
+	}
+
+	.radio-wrapper-6 input[type=radio]:disabled {
+		--b: var(--disabled);
+		cursor: not-allowed;
+		opacity: 0.9;
+	}
+
+	.radio-wrapper-6 input[type=radio]:disabled:checked {
+		--b: var(--disabled-inner);
+		--bc: var(--border);
+	}
+
+
+	.radio-wrapper-6 input[type=radio]:disabled + label {
+		cursor: not-allowed;
+		color: #8A91B4;
+	}
+
+	.radio-wrapper-6 input[type=radio]:hover:not(:checked):not(:disabled) {
+		--bc: var(--border-hover);
+	}
+
+	.radio-wrapper-6 input[type=radio]:focus {
+		box-shadow: 0 0 0 var(--focus);
+	}
+
+	.radio-wrapper-6 input[type=radio] + label {
+		font-size: 14px;
+		line-height: 21px;
+		display: inline-block;
+		vertical-align: top;
+		cursor: pointer;
+		margin-left: .5em;
+	}
+}
+
+/*===================================================================*/
