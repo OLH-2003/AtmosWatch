@@ -1,4 +1,4 @@
-atellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	    id: 'MapID',
 	    tileSize: 512,
 	    zoomOffset: -1,
@@ -29,16 +29,21 @@ map.getPane('labels').style.zIndex = 650;
 map.getPane('labels').style.pointerEvents = 'none';
 
 var markerClusters = L.markerClusterGroup();
-markerLayer.eachLayer(function(layer) { // Add each FEP location marker into the cluster group
-	    markerClusters.addLayer(layer);
-});
+if (typeof markerLayer !== 'undefined' && markerLayer && typeof markerLayer.eachLayer === 'function') {
+	markerLayer.eachLayer(function(layer) {
+	markerClusters.addLayer(layer);
+	});
+}
 
-var scotlandDNO = L.layerGroup([scotlandNorth, outerHebrides, shetland]); // Scotland DNO made up of three DNO geoJSON "boxes"
+var scotlandLayers = [];
+if (typeof scotlandNorth !== 'undefined') scotlandLayers.push(scotlandNorth);
+if (typeof outerHebrides !== 'undefined') scotlandLayers.push(outerHebrides);
+if (typeof shetland !== 'undefined') scotlandLayers.push(shetland);
+var scotlandDNO = L.layerGroup(scotlandLayers); // Scotland DNO made up of available DNO geoJSON "boxes"
 
-map.addLayer(scotlandDNO);
-map.addLayer(englandSouth);
+if (scotlandLayers.length > 0) map.addLayer(scotlandDNO);
+if (typeof englandSouth !== 'undefined') map.addLayer(englandSouth);
 map.addLayer(markerClusters);
-map.addControl(new MainForm());
 
 var baseMaps = {
 	    "Streets": street,
@@ -46,7 +51,7 @@ var baseMaps = {
 };
 
 var overlayMaps  = { // Layers added can be toggled on or off
-	    'FEPs': markerClusters,
+	    'Assets': markerClusters,
 	    'Scotland DNO': scotlandDNO,
 	    'England DNO': englandSouth,
 	    'Map Labels': mapNames
@@ -66,11 +71,12 @@ document.querySelectorAll('.leaflet-control-layers-base label').forEach(label =>
 });
 
 document.querySelectorAll('.layer-checkbox').forEach(function(checkbox) {
-	    checkbox.addEventListener('change', function() {
-		            if (this.checked) {
-				                map.addLayer(overlayMaps[this.value]);
-				            } else {
-						                map.removeLayer(overlayMaps[this.value]);
-						            }
-		        });
+	checkbox.addEventListener('change', function() {
+		if (this.checked) {
+			map.addLayer(overlayMaps[this.value]);
+		} else {
+			map.removeLayer(overlayMaps[this.value]);
+		}
+	
+	});
 });
