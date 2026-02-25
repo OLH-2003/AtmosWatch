@@ -42,7 +42,7 @@ height: 100%;
 	box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 	font-size: 14px;
 	z-index: 1001;
-	background-image: linear-gradient(to right, #003e66, #024d7d, #003e66);
+	background-image: linear-gradient(135deg, #0f1c2e, #1e3a5f);
 	color: white;
 }
 
@@ -69,7 +69,7 @@ html, body {
 	box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 	font-size: 14px;
 	z-index: 1001;
-	background-image: linear-gradient(to right, #003e66, #024d7d, #003e66);
+	background-image: linear-gradient(135deg, #0f1c2e, #1e3a5f);
 }
 
 .marker-cluster-small {
@@ -190,6 +190,37 @@ html, body {
 	display: flex;
 	align-items: center;
 }
+
+.map-go-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    font-size: 1.5rem; /* Scales with root font size */
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #0f1c2e, #1e3a5f);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.map-go-back:hover,
+.map-go-back:focus {
+    opacity: 0.85;
+    transform: scale(1.05); /* Slight zoom effect */
+    outline: none; /* Remove default outline */
+}
+
+.map-go-back:focus-visible {
+    outline: 2px solid #e6eef7; /* Accessible focus indicator */
+}
+
+.map-go-back, .map-go-back * {
+    color: #ffffff !important;
+}
+
 
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
 	.radio-wrapper-6 input[type=radio] {

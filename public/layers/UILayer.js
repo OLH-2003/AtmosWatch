@@ -39,9 +39,10 @@ var MapGoBack = L.Control.extend({
 
 		// Back control: clickable arrow that returns to index.html
     		container.innerHTML = `
-      		<a href="index.html" class="map-go-back" title="Back to index" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;text-decoration:none;font-size:18px;color:#000;">
+      		<a href="index.html" class="map-go-back" title="Back to index">
  	       &#8592;
-      		</a>;
+      		</a>
+		`;
 		return container;
 	},
 });
