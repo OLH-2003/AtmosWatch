@@ -33,14 +33,15 @@ var MapGoBack = L.Control.extend({
 	},
 
 	onAdd: function (map) {
-		var container = L.DomUtil.create("div", "leaflet-bar leaflet-control custom-form");
-		L.DomEvent.disableClickPropagation(container);
+		var container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+    		L.DomEvent.disableClickPropagation(container);
 
-		container.innerHTML = `
-		<form id="keyForm">
-		<!-- Empty for now -->
-		</form>`;
 
+		// Back control: clickable arrow that returns to index.html
+    		container.innerHTML = `
+      		<a href="index.html" class="map-go-back" title="Back to index" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;text-decoration:none;font-size:18px;color:#000;">
+ 	       &#8592;
+      		</a>;
 		return container;
 	},
 });

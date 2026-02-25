@@ -60,6 +60,11 @@ var overlayMaps  = { // Layers added can be toggled on or off
 L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 document.querySelector('.leaflet-control-layers').classList.add('leaflet-control-layers-expanded');
 
+// Add MapGoBack control (top-left back arrow) if defined
+if (typeof MapGoBack !== 'undefined') {
+	map.addControl(new MapGoBack());
+}
+
 document.querySelectorAll('.leaflet-control-layers-base label').forEach(label => {
 	  const input = label.querySelector('input[type="radio"]');
 
