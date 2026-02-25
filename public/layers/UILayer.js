@@ -46,3 +46,36 @@ var MapGoBack = L.Control.extend({
 		return container;
 	},
 });
+
+// Extend the control position system to include topcenter
+  const originalInitControlPos = map._initControlPos;
+  map._initControlPos = function () {
+    originalInitControlPos.call(this);
+
+    // Create top center container
+    const corners = this._controlCorners;
+    const container = this._controlContainer;
+
+    corners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', container);
+  };
+
+var Header = L.Control.extend({
+	options: {
+		position: "topcenter",
+	},
+
+	onAdd: function(map) {
+		var container = L.DomUtil.create("div", "leaflet-topcenter-header")
+		L.DomEvent.disableClickPropagation(container);
+
+		container.innerHTML = ` 
+		<div class="header-box"> 
+		<img src="../images/logo.png" class="header-logo" /> 
+		<h1 class="header-title">AtmosWatch</h1> 
+		</div> `
+		; 
+
+		return container;
+		
+	},
+});
