@@ -52,27 +52,15 @@ var MapGoBack = L.Control.extend({
 // _initControlPos method is executed during construction, so the new
 // corner exists by the time controls are added.
 L.Map.addInitHook(function () {
-  console.log('UILayer: init hook running for map', this);
   const originalInitControlPos = this._initControlPos;
   this._initControlPos = function () {
     originalInitControlPos.call(this);
 
     // Create top center container if it doesn't exist already
-    // (use non‑minified property names; control corners may be renamed in some bundles)
     const corners = this._controlCorners || this._c || {};
     const container = this._controlContainer || this._controlContainer || this._m;
-    if (corners && container) {
-      if (!corners.topcenter) {
-        corners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', container);
-        console.log('UILayer: added topcenter corner', corners.topcenter);
-      } else {
-        console.log('UILayer: topcenter corner already exists', corners.topcenter);
-      }
-    } else {
-      console.warn('UILayer: unable to extend control corners; properties missing', {
-        corners: this._controlCorners,
-        container: this._controlContainer
-      });
+    if (corners && container && !corners.topcenter) {
+      corners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', container);
     }
   };
 });
@@ -82,11 +70,9 @@ var Header = L.Control.extend({
 		position: "topcenter",
 	},
 
-	onAdd: function(map) {
-		console.log('UILayer: Header.onAdd called', map);
-		console.log('UILayer: existing corners', map._controlCorners);
-		var container = L.DomUtil.create("div", "leaflet-topcenter-header");
-		L.DomEvent.disableClickPropagation(container);
+  onAdd: function(map) {
+    var container = L.DomUtil.create("div", "leaflet-topcenter-header");
+    L.DomEvent.disableClickPropagation(container);
 
 		container.innerHTML = ` 
 		<div class="header-box"> 

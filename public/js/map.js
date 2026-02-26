@@ -24,13 +24,7 @@ var map = L.map('map', {
 	    layers: [street] // Default view setting (Street vs Satellite)
 }).setView([55.3781, -3.4360], 8); // Default view somewhere in middle of UK (on refresh)
 
-// Note: topcenter support is added via an init hook in UILayer.js earlier.
-// As a safeguard, create the corner manually if it wasn't added.
-if (map._controlCorners && !map._controlCorners.topcenter) {
-    console.warn('map.js: topcenter corner missing, creating manually');
-    map._controlCorners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', map._controlContainer);
-}
-
+// topcenter support is provided by UILayer.js during map initialization
 map.createPane('labels');
 map.getPane('labels').style.zIndex = 650;
 map.getPane('labels').style.pointerEvents = 'none';
