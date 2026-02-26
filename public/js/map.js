@@ -66,8 +66,16 @@ if (typeof MapGoBack !== 'undefined') {
 	map.addControl(new MapGoBack());
 }
 
+// Ensure topcenter corner exists (robust fallback)
+if (map._controlCorners && !map._controlCorners.topcenter) {
+	map._controlCorners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', map._controlContainer);
+}
+
 if (typeof Header !== 'undefined') {
-	map.addControl(new Header());
+	// Add header when map is ready to be safe
+	map.whenReady(function() {
+		map.addControl(new Header());
+	});
 }
 
 document.querySelectorAll('.leaflet-control-layers-base label').forEach(label => {
