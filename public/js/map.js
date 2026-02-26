@@ -24,6 +24,10 @@ var map = L.map('map', {
 	    layers: [street] // Default view setting (Street vs Satellite)
 }).setView([55.3781, -3.4360], 8); // Default view somewhere in middle of UK (on refresh)
 
+if (typeof extendLeafletTopCenter !== 'undefined') {
+    extendLeafletTopCenter(map);
+}
+
 map.createPane('labels');
 map.getPane('labels').style.zIndex = 650;
 map.getPane('labels').style.pointerEvents = 'none';

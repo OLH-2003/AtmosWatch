@@ -47,9 +47,11 @@ var MapGoBack = L.Control.extend({
 	},
 });
 
-// Extend the control position system to include topcenter
-  const originalInitControlPos = map._initControlPos;
-  map._initControlPos = function () {
+// Provide helper to extend the control position system to include topcenter
+window.extendLeafletTopCenter = function(mapInstance) {
+  if (!mapInstance || !mapInstance._initControlPos) return;
+  const originalInitControlPos = mapInstance._initControlPos;
+  mapInstance._initControlPos = function () {
     originalInitControlPos.call(this);
 
     // Create top center container
@@ -58,6 +60,7 @@ var MapGoBack = L.Control.extend({
 
     corners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', container);
   };
+};
 
 var Header = L.Control.extend({
 	options: {
