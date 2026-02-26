@@ -65,6 +65,10 @@ if (typeof MapGoBack !== 'undefined') {
 	map.addControl(new MapGoBack());
 }
 
+if (typeof Header !== 'undefined') {
+	map.addControl(new Header());
+}
+
 document.querySelectorAll('.leaflet-control-layers-base label').forEach(label => {
 	  const input = label.querySelector('input[type="radio"]');
 
