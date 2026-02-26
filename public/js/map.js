@@ -24,9 +24,8 @@ var map = L.map('map', {
 	    layers: [street] // Default view setting (Street vs Satellite)
 }).setView([55.3781, -3.4360], 8); // Default view somewhere in middle of UK (on refresh)
 
-if (typeof extendLeafletTopCenter !== 'undefined') {
-    extendLeafletTopCenter(map);
-}
+// Note: topcenter support is added via an init hook in UILayer.js
+// so there's no need to call a helper here.
 
 map.createPane('labels');
 map.getPane('labels').style.zIndex = 650;
