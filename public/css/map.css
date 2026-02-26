@@ -197,7 +197,9 @@ html, body {
 
 .leaflet-topcenter-header { 
 	pointer-events: auto; /* re-enable interaction for the header */ 
-} 
+	z-index: 1003; /* sit above most other controls */
+	display: inline-block;
+}
 
 /* The bubble/header box */ .header-box { 
 	background: linear-gradient(135deg, #0f1c2e, #1e3a5f);
