@@ -52,9 +52,9 @@ var baseMaps = {
 };
 
 var overlayMaps  = { // Layers added can be toggled on or off
-	    'Assets': markerClusters,
-	    'Scotland DNO': scotlandDNO,
-	    'England DNO': englandSouth,
+	    'Site Markers': markerClusters,
+	    'SSEN Scotland': scotlandDNO,
+	    'SSEN England': englandSouth,
 	    'Map Labels': mapNames
 };
 

@@ -62,6 +62,11 @@ L.Map.addInitHook(function () {
     if (corners && container && !corners.topcenter) {
       corners.topcenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', container);
     }
+
+    // Create bottom center container if it doesn't exist already
+    if (corners && container && !corners.bottomcenter) {
+      corners.bottomcenter = L.DomUtil.create('div', 'leaflet-bottom leaflet-center', container);
+    }
   };
 });
 
@@ -77,11 +82,30 @@ var Header = L.Control.extend({
 		container.innerHTML = ` 
 		<div class="header-box"> 
 		<img src="images/logo.png" class="header-logo" /> 
-		<h1 class="header-title">AtmosWatch</h1> 
+		<h1 class="header-title">Tropospherics Map</h1> 
 		</div> `
 		; 
 
 		return container;
 		
 	},
+});
+
+var TimeLine = L.Control.extend({
+	options: {
+		position: "bottomcenter",
+	},
+
+  onAdd: function(map) {
+    var container = L.DomUtil.create("div", "leaflet-bottomcenter-timeline");
+    L.DomEvent.disableClickPropagation(container);
+
+	  	container.innerHTML = `
+		<div class="timeline-box">
+		</div>`
+	  	;
+
+	  	return container;
+
+  	},
 });

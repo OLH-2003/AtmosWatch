@@ -3,7 +3,7 @@
 	<head>		
 		<meta charset="UTF-8">
 		<title>Duct Predictor | AtmosWatch</title>
-		<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
 		<link rel="stylesheet" href="css/map.css"/>
@@ -20,11 +20,18 @@
 
 	</body>
 
-	    <script src="layers/fepLayer.js"></script>
+	<!--
 	    <script src="layers/outerHebrides.js"></script>
 	    <script src="layers/scotlandNorth.js"></script>
-	    <script src="layers/UILayer.js"></script>
 	    <script src="layers/englandSouth.js"></script>
+	-->
+
+	    <!--Grabbing GeoJSON data from S3 bucket via CloudFront Distro-->
+	    <script src="https://d194u6m477mcvp.cloudfront.net/MapGeoJSON/outerHebrides.js"></script>
+	    <script src="https://d194u6m477mcvp.cloudfront.net/MapGeoJSON/scotlandNorth.js"></script>
+	    <script src="https://d194u6m477mcvp.cloudfront.net/MapGeoJSON/englandSouth.js"></script>
+
+	    <script src="layers/UILayer.js"></script>
 	    <script src="js/map.js"></script>
 </html>
 
