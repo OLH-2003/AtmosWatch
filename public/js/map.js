@@ -30,10 +30,44 @@ map.getPane('labels').style.zIndex = 650;
 map.getPane('labels').style.pointerEvents = 'none';
 
 var markerClusters = L.markerClusterGroup();
-if (typeof markerLayer !== 'undefined' && markerLayer && typeof markerLayer.eachLayer === 'function') {
-	markerLayer.eachLayer(function(layer) {
-	markerClusters.addLayer(layer);
-	});
+
+async function loadAssetMarkers() {
+	const bounds = map.getBounds();
+	const bbox = [
+		bounds.getWest(),
+		bounds.getSouth(),
+		bounds.getEast().
+		bounds.getNorth()
+	].join(',');
+
+	try {
+		const response = await fetch(`/api/assets?bbox=${bbox}`);
+		const data = await response.json();
+
+		markerClusters.clearLayers();
+
+		L.geoJSON(data, {
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng).bindPopup(
+					`<b>
+					${feature.properties.location_name}
+					</b><br><br>
+					Address:<br>
+					${feature.properties.location_address}<br>
+					${feature.properties.location_postcode}<br>
+					<br>
+					${feature.properties.w3w}<br>
+					<br>
+					${feature.properties.longitude}, ${feature.properties.latitude}
+				`);
+			}
+		}).eachLayer(function(layer) {
+			markerClusters.addLayer(layer);
+		});
+
+	} catch (e) {
+		console.error("Error loading asset markers: ", e);
+	}
 }
 
 var scotlandLayers = [];
@@ -60,6 +94,9 @@ var overlayMaps  = { // Layers added can be toggled on or off
 
 L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 document.querySelector('.leaflet-control-layers').classList.add('leaflet-control-layers-expanded');
+
+map.on('moveend', loadAssetMarkers);
+loadAssetMarkers();
 
 // Add MapGoBack control (top-left back arrow) if defined
 if (typeof MapGoBack !== 'undefined') {
