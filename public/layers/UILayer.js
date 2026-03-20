@@ -81,7 +81,7 @@ var Header = L.Control.extend({
 
 		container.innerHTML = ` 
 		<div class="header-box"> 
-		<img src="images/logo.png" class="header-logo" /> 
+		<img src="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png" class="header-logo" /> 
 		<h1 class="header-title">Tropospherics Map</h1> 
 		</div> `
 		; 

@@ -36,7 +36,7 @@ async function loadAssetMarkers() {
 	const bbox = [
 		bounds.getWest(),
 		bounds.getSouth(),
-		bounds.getEast().
+		bounds.getEast(),
 		bounds.getNorth()
 	].join(',');
 
@@ -53,12 +53,7 @@ async function loadAssetMarkers() {
 					${feature.properties.location_name}
 					</b><br><br>
 					Address:<br>
-					${feature.properties.location_address}<br>
-					${feature.properties.location_postcode}<br>
-					<br>
-					${feature.properties.w3w}<br>
-					<br>
-					${feature.properties.longitude}, ${feature.properties.latitude}
+					${feature.properties.location_address || ''}<br>
 				`);
 			}
 		}).eachLayer(function(layer) {
