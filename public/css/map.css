@@ -349,4 +349,48 @@ html, body {
 	}
 }
 
-/*===================================================================*/
+/*========================= Time Slider ============================*/
+
+.noUi-target {
+	border-radius: 8px;
+	background: #e6e6e6;
+	border: none;
+}
+
+.noUi-connect {
+	background: linear-gradient(135deg, #0f1c2e, #1e3a5f);
+}
+
+.noUi-tooltip {
+	font-size: 12px;
+	font-weight: bold;
+	background: linear-gradient(135deg, #0f1c2e, #1e3a5f);
+	color: white;
+	border: none;
+	border-radius: 6px;
+	padding: 4px 8px;
+}
+
+.noUi-pips {
+	overflow: hidden;
+	color: black;
+	padding: 4px 8px;
+}
+
+.noUi-value {
+	white-space: nowrap;
+	transform: translateX(-50%) translateY(125%);
+	color: white;
+	font-weight: 500;
+	font-size: 0.75rem;
+}
+
+.noUi-value:first-child {
+	transform: translateX(0%);
+	text-align: left;
+}
+
+.noUi-value:last-child {
+	transform: translateX(-100%);
+	text-align: right;
+}

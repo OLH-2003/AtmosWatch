@@ -35,8 +35,10 @@ app.get('/api/assets', async (req, res) => {
 			SELECT
 			location_id,
 			location_name,
-			location_type,
+			location_postcode,
 			location_address,
+			w3w,
+			location_type,
 			ST_AsGeoJSON(geom::geometry)::json AS geometry
 			FROM asset_details, b
 			WHERE ST_Intersects(geom::geometry, b.g)
@@ -60,6 +62,49 @@ app.get('/api/assets', async (req, res) => {
 		};
 		res.setHeader('Content-Type', 'application/json');
 		res.json(fc);
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: 'Server error' });
+	}
+});
+
+app.get('/api/gradients', async (req, res) => {
+	try {
+		const { forecast_time } = req.query;
+		console.log("Querying forecast_time:", forecast_time);
+		
+		if (!forecast_time) {
+			return res.status(400).json({ error: 'forecast_time is required' });
+		}
+
+		const sql = `SELECT lat, lon, dm_dz, condition FROM refractivity_grad WHERE forecast_time = $1::timestamp;`;
+		console.log("SQL:", sql);
+
+		const { rows } = await pool.query(sql, [forecast_time]);
+		
+		if (rows.length === 0) {
+			return res.json({
+				type: "FeatureCollection",
+				features: []
+			});
+		}
+
+		const fc = {
+			type: "FeatureCollection",
+			features: rows.map(r => ({
+				type: "Feature",
+				geometry: {
+					type: "Point",
+					coordinates: [r.lon, r.lat]
+				},
+				properties: {
+					dm_dz: r.dm_dz,
+					condition: r.condition
+				}
+			}))
+		};
+		res.json(fc);
+	
 	} catch (e) {
 		console.error(e);
 		res.status(500).json({ error: 'Server error' });

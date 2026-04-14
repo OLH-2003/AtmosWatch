@@ -29,7 +29,156 @@ map.createPane('labels');
 map.getPane('labels').style.zIndex = 650;
 map.getPane('labels').style.pointerEvents = 'none';
 
+var slider = document.getElementById('forecastSlider');
 var markerClusters = L.markerClusterGroup();
+
+function getColour(d) {
+	return d < -157 ? "#ff0000" :
+	       d < 0    ? "#ffa500" :
+			  "#00ff00";
+}
+
+function loadGradientLayer(timestamp) {
+	fetch(`/api/gradients?forecast_time=${timestamp}`)
+		.then(r => r.json())
+		.then(geojson => {
+			if (window.gradLayer) map.removeLayer(window.gradLayer);
+			
+			if (!geojson || geojson.features.length === 0) {
+				console.log("No data for", timestamp);
+				return;
+			}
+
+			window.gradLayer = L.geoJSON(geojson, {
+				pointToLayer: (feature, latlng) => {
+					return L.circleMarker(latlng, {
+						radius: 4,
+						color: getColour(feature.properties.dm_dz)
+					});
+				}
+			}).addTo(map);
+		});
+}
+
+
+// Prepare variables for time slider
+const sliderTimes = [];
+const startDateUTC = new Date();
+startDateUTC.setUTCHours(0, 0, 0, 0); //Daylight saving causing mayhem
+for (let i = 0; i < 40; i++) {
+	sliderTimes.push(new Date(startDateUTC.getTime() + i * 3 * 3600 * 1000).toISOString());
+}
+
+initSlider(sliderTimes);
+
+function initSlider(times) {	
+	noUiSlider.create(slider, {
+		start: [0],
+		range: {
+		'min': 0,
+		'max': times.length - 1
+		},
+		step: 1,
+		connect: [true, false],
+		behaviour: 'tap-drag',
+		tooltips: true,
+
+		pips: {
+			mode: 'steps',
+			density: 2,
+			format: {
+				to: (index) => {
+					const i = Math.round(index);
+					const t = new Date(times[index]);
+
+					if (isNaN(t.getTime())) return '';
+
+					const isNoon = t.getUTCHours() === 12;
+					const isFinalStep = i === (times.length - 1);
+
+					if (isNoon && !isFinalStep) {
+						return t.toLocaleDateString("en-GB", {
+							weekday: 'short',
+							day: '2-digit',
+							month: 'short',
+							timeZone: "UTC"
+						});
+					}
+					return '';
+				},
+				from: Number
+			}
+		},
+
+		tooltips: {
+			to: (index) => {
+				const i = Math.round(index);
+				const t = new Date(times[i]);
+				return t.toLocaleString("en-GB", {
+					weekday: 'short',
+					hour: '2-digit',
+					minute: '2-digit',
+					timeZone: "UTC"
+				});
+			}
+		}
+	})
+
+	slider.noUiSlider.on("update", function (values, handle) {
+		const index = Math.round(values[0]);
+		const timestamp = times[index];
+		loadGradientLayer(timestamp);
+	});
+}
+
+const iconBase = 'https://d194u6m477mcvp.cloudfront.net/Assets/MapIcons'; //CloudFront icon location
+var IconSize = [40,40];
+var IconAnchor = [24,48];
+var PopupAnchor = [0,-32];
+
+const icons = {
+	SS: L.icon({
+		iconUrl: `${iconBase}/SubStationAlt.png`,
+		iconSize: IconSize,
+		iconAnchor: IconAnchor,
+		popupAnchor: PopupAnchor
+	}),
+	PS: L.icon({
+		iconUrl: `${iconBase}/PowerStationAlt.png`,
+		iconSize: IconSize,
+		iconAnchor: IconAnchor,
+		popupAnchor: PopupAnchor
+	}),
+	RS: L.icon({
+	        iconUrl: `${iconBase}/RadioSiteAlt.png`,
+	        iconSize: IconSize,
+	        iconAnchor: IconAnchor,
+	        popupAnchor: PopupAnchor
+	}),
+	HS: L.icon({
+	        iconUrl: `${iconBase}/HydroPowerStationAlt.png`,
+	        iconSize: IconSize,
+	        iconAnchor: IconAnchor,
+	        popupAnchor: PopupAnchor
+	}),
+	WF: L.icon({
+	        iconUrl: `${iconBase}/WindFarmAlt.png`,
+	        iconSize: IconSize,
+	        iconAnchor: IconAnchor,
+	        popupAnchor: PopupAnchor
+	}),
+};
+
+const defaultIcon = L.icon({
+	iconUrl: `${iconBase}/SubStationAlt.png`,
+	iconSize: IconSize,
+	iconAnchor: IconAnchor,
+	popupAnchor: PopupAnchor
+});
+
+function iconForType(t) {
+	return icons[t] || defaultIcon;
+}
 
 async function loadAssetMarkers() {
 	const bounds = map.getBounds();
@@ -48,15 +197,18 @@ async function loadAssetMarkers() {
 
 		L.geoJSON(data, {
 			pointToLayer: function (feature, latlng) {
-				return L.marker(latlng).bindPopup(
-					`<b>
-					${feature.properties.location_name}
-					</b><br><br>
-					Address:<br>
-					${feature.properties.location_address || ''}<br>
-				`);
+				var hasProps = feature && feature.properties;
+				var t    = hasProps ? feature.properties.location_type : null;
+				var name = hasProps ? feature.properties.location_name : '';
+				var addr = hasProps ? (feature.properties.location_address || '') : '';
+				
+				return L.marker(latlng, { icon: iconForType(t)
+					}).bindPopup(
+						'<b>' + name + '</b><br><br>' +
+						(addr ? ('Address <br>' + addr) : '')
+					);
 			}
-		}).eachLayer(function(layer) {
+		}).eachLayer(function (layer) {
 			markerClusters.addLayer(layer);
 		});
 
