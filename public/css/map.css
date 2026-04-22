@@ -1,34 +1,44 @@
-#map {
-position: absolute;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
-width: 100%;
-height: 100%;
-}
-
-.custom-form {
-	padding: 20px;
-	border-radius: 15px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	font-size: 14px;
-	width: 23vw;
-	height: 65vh;
-}
-
-.leaflet-top.leaflet-right {
+#loadingOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(15, 28, 46, 0.85);
+	backdrop-filter: blur(3px);
+	z-index: 9999;
 	display: flex;
-	flex-direction: row-reverse;
-	align-items: flex-start;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 18px;
+	transition: opacity 0.4s ease;
 }
 
-.leaflet-control-layers {
-	margin-right: 60px; /* Adjust as needed */
+.loadingSpinner {
+	width: 48px;
+	height: 48px;
+	border: 5px solid rgba(255,255,255,0.3);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: spin 0.9s linear infinite;
+	margin-bottom: 12px;
 }
 
-.leaflet-control-layers {
-	width: auto !important;
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}
+
+#loadingOverlay.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#map {
+	position: absolute;
+	top: 0;	bottom: 0; left: 0; right: 0;
+	width: 100%; height: 100%;
 }
 
 .leaflet-control-layers-expanded {
@@ -57,19 +67,6 @@ html, body {
 
 * {
 	font-family: sans-serif;
-}
-
-.layer-box {
-	position: fixed;
-	top: 90px;
-	right: 23vw;
-	background: white;
-	padding: 15px;
-	border-radius: 5px;
-	box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-	font-size: 14px;
-	z-index: 1001;
-	background-image: linear-gradient(135deg, #0f1c2e, #1e3a5f);
 }
 
 .marker-cluster-small {
@@ -393,4 +390,10 @@ html, body {
 .noUi-value:last-child {
 	transform: translateX(-100%);
 	text-align: right;
+}
+
+/*===================== Modals ==============================*/
+
+.modal-overlay {
+	display: none;
 }

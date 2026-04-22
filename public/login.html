@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Admin | AtmosWatch </title>
+		<link rel="icon" type="image/png" sizes="32x32" href="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png">
+		<link rel="stylesheet" href="../css/styles.css">
+		<link rel="stylesheet" href="../css/login.css">
+	</head>	
+	<body>
+		<header class="site-banner">
+			<div class="banner-content">
+				<img src="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png" alt="AtmosWatch Logo" class="site-logo">
+				<h1 class="site-title">AtmosWatch</h1>
+			</div>
+		</header>
+		<form class="box" id="form_login" method="post">
+		<div class="imgcontainer">
+			<img src="https://d194u6m477mcvp.cloudfront.net/Assets/user.png" alt="Avatar" class="avatar">
+		</div>
+        	<div class="container">
+        		<label for="username"><b>Username</b></label>
+        		<input type="text" placeholder="Enter Username" id="username" required autocomplete="username">
+        		<label for="password"><b>Password</b></label>
+        		<input type="password" placeholder="Enter Password" id="password" required autocomplete="current-password">
+        		<br><br>
+        		<button type="submit">Login</button>
+		<div>
+		</form>
+
+		<div id="error" style="color:red; margin-top:10px;"></div>
+ 
+		<script type="text/JavaScript" src="js/auth.js"></script>
+		<script type="text/JavaScript" src="js/login.js"></script>
+	</body>
+</html>

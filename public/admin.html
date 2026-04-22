@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="js/auth.js"></script>
+		<script>
+			AUTH.requireAuth()
+		</script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Admin | AtmosWatch</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png">
+		<link rel="stylesheet" href="../css/styles.css">
+		<link rel="stylesheet" href="../css/admin.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	</head>
+	<body> <!-- Banner / Logo Area -->
+		<header class="site-banner">
+			<div class="banner-content">
+				<img src="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png" alt="AtmosWatch Logo" class="site-logo">
+				<h1 class="site-title">AtmosWatch</h1>
+			</div>
+
+			<div id="logout-toast" class="toast hidden">Logged out successfully</div>
+
+			<nav class="navbar">
+				<ul class="nav-links">
+					<li><a href="/index.html">Home</a></li>
+					<li><a href="/diss.html">Dissertation</a></li>
+					<li><a href="alert.html">Alert Logs</a></li>
+
+					<li class="dropdown-nav">Project <i class="fas fa-caret-down"></i>
+						<ul class="dropdown-nav-content">
+							<li><a href="map.html">Tropospheric Map</a></li>
+							<li><a href="guide.html">User Guide</a></li>
+							<li><a href="ack.html">Acknowledgements</a></li>
+							<li><a id="administration" href="#">Administration</a></li>
+						</ul>
+					</li>
+					<li class="dropdown-nav">Account <i class="fas fa-caret-down"></i>
+						<ul class="dropdown-nav-content">
+							<li><span id="current-user"></span></li>
+							<li><a id="change-password" href="#">Change Password</a></li>
+							<li><a id="login-logout" href="#"></a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<div class="admin-container">
+				<div class="admin-tabs">
+					<button id="users-tab" class="admin-tab" onclick="OpenManage(event, 'users')">Users</button>
+					<button id="assets-tab" class="admin-tab" onclick="OpenManage(event, 'assets')">Assets</button>
+				</div>
+			
+			<div class="admin-content-wrapper">
+				<div id="admin-users" class="admin-content">
+					<div class="admin-section">
+						<h2 class="admin-title">User Management</h2>
+
+						<div class="admin-controls">
+							<input type="text" class="admin-search" placeholder="Search users..." oninput="filterUsers()">
+							<button class="admin-search-btn">Find</button>
+							<button class="admin-add-btn" onclick="loadUserCreate()">Add User</button>
+						</div>
+
+						<table class="admin-table" id="users-table">
+							<thead>
+								<tr>
+									<th style="width:20%;" scope="col">Username</th>
+									<th style="width:25%;" scope="col">Password Changed</th>
+									<th style="width:25%;" scope="col">Last Logon</th>
+									<th style="width:30%" scope="col"></th>
+								</tr>
+							</thead>
+							<tbody id="users-table-body">
+								<!-- filled via API call to DB -->
+							</tbody>
+						</table>
+
+						<div class="admin-pagination" id="users-pagination"></div>
+					</div>
+  				</div>
+
+				<div id="admin-assets" class="admin-content">
+					<div class="admin-section">
+						<h2 class="admin-title">Location Management</h2>
+
+						<div class="admin-controls">
+							<input type="text" class="admin-search" placeholder="Search users..." oninput="filterAssets()">
+							<button class="admin-search-btn">Find</button>
+							<button class="admin-add-btn" onclick="loadAssetCreate()">Add Asset</button>
+						</div>
+
+						<table class="admin-table" id="assets-table">
+							<thead>
+								<tr>
+									<th style="width:35%;" scope="col">Name</th>
+									<th style="width:15%;" scope="col">Type</th>
+									<th style="width:25%;" scope="col">Coordinates</th>
+									<th style="width:25%;" scope="col"></th>
+								</tr>
+							</thead>
+							<tbody id="assets-table-body">
+								<!-- filled via API call to DB -->
+							</tbody>
+						</table>
+
+						<div class="admin-pagination" id="assets-pagination"></div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</main>
+		<script src="js/admin.js"></script>
+		<footer> © 2026 — Research Project by O.L. Holden </footer>
+		<script src="js/nav.js"></script>
+	</body>
+</html>
+

@@ -1,0 +1,77 @@
+form {
+	margin:auto;
+        vertical-align: middle;
+	width: 30%;
+	height: 60%;
+	background-size: 100% auto;
+	box-shadow: 
+		rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+	transition: 0.5s;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+	form {
+		width: 60%;
+	}
+}
+
+form:hover {
+        box-shadow: 
+		rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+		rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+		rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+		rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+		rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        box-shadow: 
+		rgb(204, 219, 232) 3px 3px 6px 0px inset, 
+		rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 95%;
+        transition: 0.2s;
+}
+
+button:hover {
+        opacity: 0.8;
+        box-shadow: 
+		rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transform: scale(1.05);
+}
+
+.imgcontainer {
+        text-align: center;
+        margin: -50px 0 12px 0;
+}
+
+img.avatar {
+        width: 40%;
+        border-radius: 50%;
+}
+
+.container {
+        padding: 16px;
+}
+
+label {
+	font-size: 25px;
+	color: #e6eef7;
+}

@@ -1,0 +1,27 @@
+<div id="userCreateModal" class="modal-overlay">
+	<div class="modal-box">
+		<h2>Create New User</h2>
+
+		<div id="userCreateAlert" class="modal-alert" style="display:none;"></div>
+
+		<form id="userCreateForm">
+			<label>Username</label>
+			<input type="text" id="newUserUsername" required>
+
+			<label>Password</label>
+			<input type="password" id="newUserPassword" required>
+
+			<label>Confirm Password</label>
+			<input type="password" id="newUserConfirm" required>
+
+			<div id="strengthMeter" class="strength-meter">
+				<div id="userCreateStrengthBar"></div>
+			</div>
+			
+			<div class="modal-buttons">
+				<button type="submit" class="btn-primary">Create</button>
+				<button type="button" id="cancelUserCreateBtn" class="btn-secondary">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

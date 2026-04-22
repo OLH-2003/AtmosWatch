@@ -4,8 +4,9 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Dissertation | AtmosWatch</title>
-		<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png">
 		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	</head>
 	<body>
 	    <header class="site-banner">
@@ -14,23 +15,40 @@
 	    		<h1 class="site-title">AtmosWatch</h1>
 	    	</div>
 
-	    <!-- Navigation -->
-	    <nav class="navbar">
-	    		<ul class="nav-links">
-			<li><a href="/index.html">Home</a></li>
-	    		<li><a href="#">Dissertation</a></li>
-	    		<li><a href="#">Alert Logs</a></li>
-	    		<li><a href="/map.html">Tropospheric Map</a></li>
-	        </ul>
-	    </nav>
+		<div id="logout-toast" class="toast hidden">Logged out successfully</div>
+
+		<nav class="navbar">
+			<ul class="nav-links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="#">Dissertation</a></li>
+				<li><a href="alert.html">Alert Logs</a></li>
+
+				<li class="dropdown-nav">Project <i class="fas fa-caret-down"></i>
+				    <ul class="dropdown-nav-content">
+					<li><a href="map.html">Troposheric Map</a></li>
+					<li><a href="guide.html">User Guide</a></li>
+					<li><a href="ack.html">Acknowledgements</a></li>
+					<li><a id="administration" href="/admin.html">Administration</a></li>
+				    </ul>
+				</li>
+				<li class="dropdown-nav">Account <i class="fas fa-caret-down"></i>
+				    <ul class="dropdown-nav-content">
+					<li><span id="current-user"></span></li>
+					<li><a id="change-password" href="#">Change Password</a></li>
+					<li><a id="login-logout" href="#"></a></li>
+				    </ul>
+				</li>
+			</ul>
+		 </nav>		
 	    </header>
 
 	    <!-- Main Content -->
 	    <main class="content-container">
 	    	<h2 class="page-heading">Dissertation</h2>
-		<h3>Last updated - Feburary 20th 15:32</h3>
-		<iframe src="https://d194u6m477mcvp.cloudfront.net/Docs/TDoc.pdf" class="pdf-viewer"></iframe>
+		<h3>Last updated - April 15th 17:27</h3>
+		<iframe src="https://d194u6m477mcvp.cloudfront.net/Docs/DisDoc.pdf" class="pdf-viewer"></iframe>
 	    </main>
 	    <footer> © 2026 — Research Project by Oliver Holden </footer>
+	    <script src="js/nav.js"></script>
 	</body>
 </html>

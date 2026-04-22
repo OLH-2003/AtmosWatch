@@ -1,13 +1,17 @@
 <!DOCTYPE html> 
 <html lang="en"> 
-	<head> 
+	<head>
 		<meta charset="UTF-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title>Home | AtmosWatch</title>
-		<link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
-		<link rel="stylesheet" href="css/styles.css"> 
+		<link rel="icon" type="image/png" sizes="32x32" href="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 	</head> 
-	<body> <!-- Banner / Logo Area --> 
+	<body> <!-- Banner / Logo Area -->
+		<div id="logout-toast" class="toast hidden">Logged out successfully</div>
+
 		<header class="site-banner">  
 			<div class="banner-content">
 				<img src="https://d194u6m477mcvp.cloudfront.net/Assets/logo.png" alt="AtmosWatch Logo" class="site-logo">
@@ -17,18 +21,43 @@
 				<ul class="nav-links">
 					<li><a href="#">Home</a></li>
 					<li><a href="/diss.html">Dissertation</a></li> 
-					<li><a href="#">Alert Logs</a></li> 
-					<li><a href="/map.html">Tropospheric Map</a></li> 
+					<li><a href="/alert.html">Alert Logs</a></li>
+
+					<li class="dropdown-nav">Project <i class="fas fa-caret-down"></i>
+					    <ul class="dropdown-nav-content">
+						<li><a href="map.html">Tropospheric Map</a></li>
+					        <li><a href="guide.html">User Guide</a></li>
+					        <li><a href="ack.html">Acknowledgements</a></li>
+						<li><a id="administration" href="admin.html">Administration</a></li>
+					    </ul>
+					</li>
+					<li class="dropdown-nav">Account <i class="fas fa-caret-down"></i>
+					    <ul class="dropdown-nav-content">
+						    <li><span id="current-user"></span></li>
+						    <li><a id="change-password" href="#">Change Password</a></li>
+						    <li><a id="login-logout" href="#"></a></li>
+					    </ul>
+					</li>
 				</ul> 
 			</nav>
 		</header> 
 		<main class="container"> 
 			<h2>Tropospheric Ducting & SCADA Networks</h2> 
 			<h3>Dissertation Research Project</h3> 
-			<p> Exploring how atmospheric propagation anomalies, specifically targetting tropospheric ducting, influence the reliability, availability, and latency of radio‑based SCADA systems. This site will eventually host interactive visualisations, furute predicted weather data linked propagation maps (DWD ICON-EU), and detailed logged findings. </p> 
-			<div class="coming-soon">FULL SITE COMING SOON</div> 
+				<p> 
+				Exploring how atmospheric propagation anomalies, specifically targetting tropospheric ducting, 
+				influence the reliability, availability, and latency of radio‑based SCADA systems.<br><br> 
+
+				This site hosts interactive visualisations through the "tropospheric map" function which amongst other abilities, 
+				displays modified refractivity gradient data across pressure levels of 1000, 950 and 925Pa (pascals) for the entire
+				geographical spread of the UK (typically from ground level to around 800 meters to best capture the effects on 
+				typically low altitude SCADA radio telemetry). All predicted weather data is collated from the DWD ICON-EU model 
+				and is calculated in full every day using the refractivity index and modified refractivity formulas provided by the
+				International Telecommunication Union (ITU, 2003).
+			</p> 
+			<div class="coming-soon">PLEASE NOTE - THIS SITE IS STILL UNDER DEVELOPMENT</div> 
 		</main> 
-		<footer> © 2026 — Research Project by O.L. Holden </footer> 
-		<script src="js/main.js"></script> 
+		<footer> © 2026 — Research Project by O.L. Holden </footer>
+		<script src="js/nav.js"></script>
 	</body> 
 </html>
